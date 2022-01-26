@@ -13,7 +13,7 @@ pre {
 }
 .meniBtn {
   border: none;
-  width: 160px;
+  width: 150px;
   height: 40px;
   font-size: x-large;
   text-transform: uppercase;
@@ -36,7 +36,7 @@ div.fixed {
   display: none;
   position: fixed;
   top: 58px;
-  left: 400px;
+  left: 390px;
   width: 400px;
   border: 3px solid #5f5604;
   padding: 5px;
