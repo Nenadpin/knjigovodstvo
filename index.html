@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel='stylesheet' href='index.css'>
+</head>
+
+<body>
+  <div class='meni'>
+    <button id='prodaja' class='meniBtn'>Prodaja</button>
+    <button id='nabavka' class='meniBtn'>Nabavka</button>
+    <button id='nivelacija' class='meniBtn'>Nivelacija</button>
+    <button id='pregledi' class='meniBtn'>Pregledi</button>
+    <button id='aplikacija' class='meniBtn'>Aplikacija</button>
+  </div>
+  <div>
+    <div class='fixed' id='izborDiv' style="height: 130px;">
+      <div>
+        <div style="width: 270px;">
+          <p class='operacija' id='operacija0'>Izaberite bazu</p>
+          <input id='selector' type="file" onchange="readFile(this)" style="display: none;">
+        </div>
+        <p>Nema baze podataka</p>
+        <p>na ovom uredjaju...</p>
+        <div class='slika'>
+          <img src="open.png" onclick="selector.click()" />
+        </div>
+      </div>
+    </div>
+    <div class='fixed forma' id='prodajaDiv'>
+      <div>
+        <div class="unos" style="width: 270px;">
+          <p class='operacija' id='infoProdaje'>Prodaja: </p>
+          <div style="margin-bottom: 2px;">
+            <input id='sifra' type="text" onfocus="sifra.select()" value="Artikl:" style="padding-left: 10px;">
+            <button id='trazi' style="position: absolute; height: 27px;"><img src="search.png"></button>
+          </div>
+          <div style="margin-bottom: 2px;">
+            <input id='kolicina' type="number" style="padding-left: 10px;">
+            <button id='kolBtn' style="position: absolute; height: 27px;"><img src="ok.png"></button>
+          </div>
+          <button id='delBtn' style="position: absolute; height: 27px;"><img src="close.png"></button>
+        </div>
+        <div id='slikaP' class="slika">
+          <img src="save.png" />
+        </div>
+      </div>
+      <p id='artikl'>-</p>
+      <hr>
+      <p id='racun'></p>
+    </div>
+    <div class='fixed forma' id='nabavkaDiv'>
+      <div>
+        <div class="unos" style="width: 270px;">
+          <p class='operacija' id='infoNabavke'>Nabavka: </p>
+          <div style="margin-bottom: 2px;">
+            <input id='sifraN' type="text" onfocus="sifraN.select()" value="Artikl:" style="padding-left: 10px;">
+            <button id='traziN' style="position: absolute; height: 27px;"><img src="search.png"></button>
+          </div>
+          <div style="margin-bottom: 2px;">
+            <input id='kolicinaN' type="number" style="padding-left: 10px;">
+            <button id='kolBtnN' style="position: absolute; height: 27px;"><img src="ok.png"></button>
+          </div>
+          <button id='delBtnN' style="position: absolute; height: 27px;"><img src="close.png"></button>
+        </div>
+        <div id='slikaN' class="slika">
+          <img src="add.png" />
+        </div>
+      </div>
+      <p id='artiklN'>-</p>
+      <hr>
+      <p id='racunN'></p>
+    </div>
+    <div class='fixed forma' id='nivelacijaDiv'>
+      <div>
+        <div class="unos" style="width: 270px;">
+          <p class='operacija' id='infoNiv'>Razlika u ceni: </p>
+          <div style="margin-bottom: 2px;">
+            <input id='sifraNiv' type="text" onfocus="sifraNiv.select()" value="Artikl:" style="padding-left: 10px;">
+            <button id='traziNiv' style="position: absolute; height: 27px;"><img src="search.png"></button>
+          </div>
+          <div style="margin-bottom: 2px;">
+            <input id='kolicinaNiv' type="number" style="padding-left: 10px;">
+            <button id='kolBtnNiv' style="position: absolute; height: 27px;"><img src="ok.png"></button>
+          </div>
+          <button id='delBtnNiv' style="position: absolute; height: 27px;"><img src="close.png"></button>
+        </div>
+        <div id='slikaNiv' class="slika">
+          <img src="input.png" />
+        </div>
+      </div>
+      <p id='artiklNiv'>-</p>
+      <hr>
+      <p id='racunNiv'></p>
+    </div>
+    <div class='fixed forma' id='pregledDiv'>
+      <div>
+        <div class="unos" style="width: 270px;">
+          <p class='operacija' id='infoPregled'>Pregled i zamena: </p>
+          <div style="margin-bottom: 2px;">
+            <input id='sifraPr' type="text" onfocus="sifraPr.select()" value="Artikl:" style="padding-left: 10px;">
+            <button id='traziPr' style="position: absolute; height: 27px;"><img src="search.png"></button>
+          </div>
+          <input id='kolicinaPr' type="number" style="padding-left: 10px;">
+          <button id='kolBtnPr' style="position: absolute; height: 27px;"><img src="zameni.png"></button>
+        </div>
+        <div id='slikaPr' class="slika">
+          <img src="menu.png" />
+        </div>
+      </div>
+      <p id='artiklPr'>-</p>
+      <hr>
+      <p id='lager'>Vrednost lagera: </p>
+      <p id='stvarno'>Knjigovodstveno stanje: </p>
+    </div>
+    <pre id="prikaz"></pre>
+  </div>
+  <script src='index.js'></script>
+  <script src='pregled.js'></script>
+  <script src='prodaja.js'></script>
+  <script src='nabavka.js'></script>
+  <script src="nivelacija.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,99 @@
+pre {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background-color: papayawhip;
+  margin-top: 50px;
+}
+.meni {
+  position: fixed;
+  top: 0%;
+  padding: 5px;
+  height: 40px;
+  width: 100vw;
+  background-color: maroon;
+}
+.meniBtn {
+  border: none;
+  width: 160px;
+  height: 40px;
+  font-size: x-large;
+  text-transform: uppercase;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  background-color: maroon;
+  color: silver;
+}
+.meniBtn:hover {
+  border: 1px solid gray;
+  color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.meniBtn:active {
+  border: none;
+  color: silver;
+  box-shadow: none;
+}
+div.fixed {
+  display: none;
+  position: fixed;
+  top: 58px;
+  left: 400px;
+  width: 400px;
+  border: 3px solid #5f5604;
+  padding: 5px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background-color: palegoldenrod;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.operacija {
+  margin: 0;
+  padding-bottom: 5px;
+  text-transform: uppercase;
+  font-size: large;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+}
+#artikl {
+  margin-bottom: 0px;
+  margin-top: 5px;
+}
+input,
+button {
+  height: 25px;
+  padding: 0px;
+  border: 1px solid;
+  margin-right: 2px;
+  text-decoration: none;
+  left: 190px;
+}
+.unos {
+  height: 110px;
+}
+.slika {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  height: 100px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.slika:active {
+  box-shadow: none;
+}
+#stvarno {
+  font-weight: bold;
+}
+#meniDiv {
+  display: none;
+}
+input {
+  text-transform: uppercase;
+}
+#delBtn,
+#delBtnN,
+#delBtnNiv {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+#delBtn:active,
+#delBtnN:active,
+#delBtnNiv:active {
+  box-shadow: none;
+}
