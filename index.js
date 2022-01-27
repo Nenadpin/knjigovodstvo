@@ -53,7 +53,7 @@ function readFile(input) {
 window.addEventListener("DOMContentLoaded", () => {
   if (localStorage.getItem("baza")) {
     Baza = JSON.parse(localStorage.getItem("baza"));
-    tekst.innerText = Baza.filter((x) => x !== null).join("\r\n");
+    tekst.innerText = Baza.filter((x)=>x!==null).map(e=>(e.split(',').slice(0,2)).join('  ')).join("\r\n");
     cenaLager = JSON.parse(localStorage.getItem("lager"));
     cenaStvarno = JSON.parse(localStorage.getItem("lagerStvarno"));
   } else izborDiv.style.display = "block";
