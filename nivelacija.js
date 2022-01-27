@@ -24,7 +24,7 @@ function nivelacija() {
         temp.push(komNiv);
         localStorage.setItem("nivelacija", JSON.stringify(temp));
       } else localStorage.setItem("nivelacija", JSON.stringify(komNiv));
-      for (let i = 0; i < komNiv.length; i++) {
+      for (let i = 1; i < komNiv.length; i++) {
         singleItem = Baza[komNiv[i][0]].split(",");
         singleItem[4] = komNiv[i][2];
         cenaLager += singleItemNiv;
