@@ -1,14 +1,14 @@
-const tekst = document.getElementById("prikaz");
-const prikazi = document.getElementById("trazi");
-const sifra = document.getElementById("sifra");
-const kol = document.getElementById("kolicina");
-const meniDiv = document.getElementById("meniDiv");
-const pregledBtn = document.getElementById("pregledi");
-const prodajaBtn = document.getElementById("prodaja");
-const nabavkaBtn = document.getElementById("nabavka");
-const nivelacijaBtn = document.getElementById("nivelacija");
-const appBtn = document.getElementById("aplikacija");
-const meniNav = document.getElementsByClassName("meniBtn");
+const text = document.getElementById("result");
+const search = document.getElementById("search");
+const code = document.getElementById("code");
+const amount = document.getElementById("amount");
+// const meniDiv = document.getElementById("meniDiv");
+const showBtn = document.getElementById("show");
+const sellBtn = document.getElementById("sell");
+const importBtn = document.getElementById("import");
+const nivelationBtn = document.getElementById("nivelation");
+const appBtn = document.getElementById("application");
+const menuNav = document.getElementsByClassName("menuBtn");
 const forma = document.getElementsByClassName("forma");
 
 let cenaLager = 0;
@@ -16,7 +16,7 @@ let cenaStvarno = 0;
 let Baza = [];
 let Operacija = 0;
 
-prikazi.addEventListener("click", () => kazi(sifra.value));
+search.addEventListener("click", () => kazi(code.value));
 
 function readFile(input) {
   let file = input.files[0];
@@ -27,7 +27,7 @@ function readFile(input) {
   izborDiv.style.display = "none";
 
   reader.onload = function () {
-    tekst.innerText = reader.result;
+    text.innerText = reader.result;
     let a = reader.result.split("\r\n");
 
     for (let i = 0; i < a.length - 1; i++) {
@@ -53,7 +53,7 @@ function readFile(input) {
 window.addEventListener("DOMContentLoaded", () => {
   if (localStorage.getItem("baza")) {
     Baza = JSON.parse(localStorage.getItem("baza"));
-    tekst.innerText = Baza.filter((x)=>x!==null).map(e=>(e.split(',').slice(0,2)).join('  ')).join("\r\n");
+    text.innerText = Baza.filter((x)=>x!==null).map(e=>(e.split(',').slice(0,2)).join('  ')).join("\r\n");
     cenaLager = JSON.parse(localStorage.getItem("lager"));
     cenaStvarno = JSON.parse(localStorage.getItem("lagerStvarno"));
   } else izborDiv.style.display = "block";
@@ -64,58 +64,58 @@ function kazi(e) {
   if (!Baza[e]) {
     alert("Nemate takav proizvod u bazi");
   } else {
-    kol.focus();
-    document.getElementById("artikl").innerText = odgovor;
+    amount.focus();
+    document.getElementById("article").innerText = odgovor;
   }
 }
 
-prodajaBtn.addEventListener("click", () => {
+sellBtn.addEventListener("click", () => {
   for (let i = 0; i < 5; i++) {
-    meniNav[i].style.color = "silver";
-    meniNav[0].style.color = "white";
+    menuNav[i].style.color = "silver";
+    menuNav[0].style.color = "white";
   }
   for (let j = 0; j < forma.length; j++) {
     forma[j].style.display = "none";
   }
 
-  prodaja();
+  sell();
 });
 
-nabavkaBtn.addEventListener("click", () => {
+importBtn.addEventListener("click", () => {
   for (let i = 0; i < 5; i++) {
-    meniNav[i].style.color = "silver";
-    meniNav[1].style.color = "white";
+    menuNav[i].style.color = "silver";
+    menuNav[1].style.color = "white";
   }
   for (let j = 0; j < forma.length; j++) {
     forma[j].style.display = "none";
   }
-  nabavka();
+  importArticle();
 });
 
-pregledBtn.addEventListener("click", () => {
+showBtn.addEventListener("click", () => {
   for (let i = 0; i < 5; i++) {
-    meniNav[i].style.color = "silver";
-    meniNav[3].style.color = "white";
+    menuNav[i].style.color = "silver";
+    menuNav[3].style.color = "white";
   }
   for (let j = 0; j < forma.length; j++) {
     forma[j].style.display = "none";
   }
-  pregled();
+  show();
 });
-nivelacijaBtn.addEventListener("click", () => {
+nivelation.addEventListener("click", () => {
   for (let i = 0; i < 5; i++) {
-    meniNav[i].style.color = "silver";
-    meniNav[2].style.color = "white";
+    menuNav[i].style.color = "silver";
+    menuNav[2].style.color = "white";
   }
   for (let j = 0; j < forma.length; j++) {
     forma[j].style.display = "none";
   }
-  nivelacija();
+  nivelation();
 });
 appBtn.addEventListener("click", () => {
   for (let i = 0; i < 5; i++) {
-    meniNav[i].style.color = "silver";
-    meniNav[4].style.color = "white";
+    menuNav[i].style.color = "silver";
+    menuNav[4].style.color = "white";
   }
   for (let j = 0; j < forma.length; j++) {
     forma[j].style.display = "none";

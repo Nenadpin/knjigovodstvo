@@ -1,19 +1,20 @@
-function prodaja() {
-  const kol = document.getElementById("kolicina");
-  const prodaj = document.getElementById("kolBtn");
-  const slika = document.getElementById("slikaP");
+function sell() {
+  const amount = document.getElementById("amount");
+  const sellBtn = document.getElementById("sellBtn");
+  const sellImage = document.getElementById("sellImage");
   const racun = document.getElementById("racun");
-  const info = document.getElementById("infoProdaje");
+  const info = document.getElementById("sellInfo");
+  const sellDiv = document.getElementById("sellDiv");
 
   let kom = [[]];
   let singleItemP = 0;
 
-  prodajaDiv.style.display = "block";
-  document.getElementById("lager").innerText = "";
-  sifra.focus();
-  document.getElementById("stvarno").innerText = "";
+  sellDiv.style.display = "block";
+  document.getElementById("stock").innerText = "";
+  code.focus();
+  document.getElementById("realState").innerText = "";
 
-  slika.addEventListener("click", () => {
+  sellImage.addEventListener("click", () => {
     if (kom.length > 1) {
       let datum = new Date();
       let iznos = 0;
@@ -41,39 +42,39 @@ function prodaja() {
     }
   });
 
-  sifra.addEventListener("keydown", (e) => {
+  code.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
-      if (parseFloat(sifra.value)) kazi(sifra.value);
+      if (parseFloat(code.value)) kazi(code.value);
     }
   });
 
-  prodaj.addEventListener("click", () => prodato(parseFloat(sifra.value)));
+  sellBtn.addEventListener("click", () => sold(parseFloat(code.value)));
 
-  kol.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") prodato(parseFloat(sifra.value));
+  amount.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") sold(parseFloat(code.value));
   });
 
-  function prodato(art) {
-    if (art && parseFloat(kol.value) > 0) {
-      kom.push([art, parseFloat(kol.value)]);
+  function sold(art) {
+    if (art && parseFloat(amount.value) > 0) {
+      kom.push([art, parseFloat(amount.value)]);
       let singleArt = Baza[art].split(",");
-      singleItemP += parseFloat(kol.value) * parseFloat(singleArt[4]);
-      document.getElementById("artikl").innerText = "-";
+      singleItemP += parseFloat(amount.value) * parseFloat(singleArt[4]);
+      document.getElementById("article").innerText = "-";
       racun.innerText +=
-        sifra.value +
+      code.value +
         "  " +
         singleArt[1] +
         "  " +
-        kol.value +
+        amount.value +
         "  " +
         singleArt[4] +
         " = " +
-        parseFloat(kol.value) * parseFloat(singleArt[4]) +
+        parseFloat(amount.value) * parseFloat(singleArt[4]) +
         "\r\n";
       info.innerText = "Prodaja: " + singleItemP.toString();
-      sifra.value = "";
-      kol.value = "";
-      sifra.focus();
+      code.value = "";
+      amount.value = "";
+      code.focus();
     } else {
       alert("Neispravna kolicina!");
     }
@@ -91,10 +92,10 @@ function prodaja() {
   function exitP() {
     kom = [[]];
     singleItemP = 0;
-    sifra.value = "";
+    code.value = "";
     kol.value = "";
-    document.getElementById("artikl").innerText = "-";
+    document.getElementById("article").innerText = "-";
     racun.innerText = "";
-    prodajaDiv.style.display = "none";
+    sellDiv.style.display = "none";
   }
 }

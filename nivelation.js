@@ -1,19 +1,20 @@
-function nivelacija() {
-  const sifraNiv = document.getElementById("sifraNiv");
-  const kolNiv = document.getElementById("kolicinaNiv");
-  const zameniNiv = document.getElementById("kolBtnNiv");
-  const slikaNiv = document.getElementById("slikaNiv");
-  const racunNiv = document.getElementById("racunNiv");
+function nivelation() {
+  const nivelationCode = document.getElementById("nivelationCode");
+  const nivelationAmount = document.getElementById("nivelationAmount");
+  const zameniNiv = document.getElementById("nivelationAmountBtn");
+  const nivelationImage = document.getElementById("nivelationImage");
+  const billNiv = document.getElementById("billNiv");
   const infoNiv = document.getElementById("infoNiv");
-  const traziNivBtn = document.getElementById("traziNiv");
+  const nivelationSearchBtn = document.getElementById("nivelationSearch");
+  const nivelationDiv = document.getElementById("nivelationDiv");
 
   let komNiv = [[]];
   let singleItemNiv = 0;
 
-  nivelacijaDiv.style.display = "block";
-  sifraNiv.focus();
+  nivelationDiv.style.display = "block";
+  nivelationCode.focus();
 
-  slikaNiv.addEventListener("click", () => {
+  nivelationImage.addEventListener("click", () => {
     if (komNiv.length > 1) {
       let datum = new Date();
       let singleItem = [];
@@ -38,26 +39,26 @@ function nivelacija() {
     }
   });
 
-  sifraNiv.addEventListener("keydown", (e) => {
+  nivelationCode.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
-      if (parseFloat(sifraNiv.value)) traziNiv(sifraNiv.value);
+      if (parseFloat(nivelationCode.value)) search(nivelationCode.value);
     }
   });
 
-  traziNivBtn.addEventListener("click", () => traziN(sifraNiv.value));
+  nivelationSearchBtn.addEventListener("click", () => traziN(nivelationCode.value));
 
   zameniNiv.addEventListener("click", () => {
-    if (Baza[parseFloat(sifraNiv.value)]) {
-      zamenjeno(parseFloat(sifraNiv.value));
+    if (Baza[parseFloat(nivelationCode.value)]) {
+      zamenjeno(parseFloat(nivelationCode.value));
     } else {
       alert("Nemate takav proizvod!");
     }
   });
 
-  kolNiv.addEventListener("keydown", (e) => {
+  nivelationAmount.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
-      if (Baza[parseFloat(sifraNiv.value)]) {
-        zamenjeno(parseFloat(sifraNiv.value));
+      if (Baza[parseFloat(nivelationCode.value)]) {
+        zamenjeno(parseFloat(nivelationCode.value));
       } else {
         alert("Nemate takav proizvod!");
       }
@@ -65,65 +66,65 @@ function nivelacija() {
   });
 
   function zamenjeno(art) {
-    if (art && parseFloat(kolNiv.value) > 0) {
+    if (art && parseFloat(nivelationAmount.value) > 0) {
       let singleArtNiv = Baza[art].split(",");
 
       komNiv.push([
         art,
         parseFloat(Baza[art].split(",")[4]),
-        parseFloat(kolNiv.value),
+        parseFloat(nivelationAmount.value),
       ]);
       singleItemNiv +=
-        (parseFloat(kolNiv.value) - parseFloat(singleArtNiv[4])) *
+        (parseFloat(nivelationAmount.value) - parseFloat(singleArtNiv[4])) *
         parseFloat(singleArtNiv[6]);
-      document.getElementById("artiklNiv").innerText = "-";
-      racunNiv.innerText +=
-        sifraNiv.value +
+      document.getElementById("articleNiv").innerText = "-";
+      billNiv.innerText +=
+        nivelationCode.value +
         "  " +
         singleArtNiv[1] +
         "  " +
-        kolNiv.value +
+        nivelationAmount.value +
         "  " +
         singleArtNiv[4] +
         " razlika " +
-        (parseFloat(kolNiv.value) - parseFloat(singleArtNiv[4])) *
+        (parseFloat(nivelationAmount.value) - parseFloat(singleArtNiv[4])) *
           parseFloat(singleArtNiv[6]).toString() +
         "\r\n";
-      singleArtNiv[4] = kolNiv.value;
+      singleArtNiv[4] = nivelationAmount.value;
       Baza[art] = singleArtNiv.join(",");
       infoNiv.innerText = "Razlika u ceni: " + singleItemNiv.toString();
-      sifraNiv.value = "";
-      kolNiv.value = "";
-      sifraNiv.focus();
+      nivelationCode.value = "";
+      nivelationAmount.value = "";
+      nivelationCode.focus();
     } else {
       alert("Neispravna kolicina!");
     }
   }
   document.getElementById("delBtnNiv").addEventListener("click", () => {
-    let temp = racunNiv.innerText.split("\r\n")[0].split("\n");
+    let temp = billNiv.innerText.split("\r\n")[0].split("\n");
     komNiv.pop();
     let umanjeno = temp.splice(temp.length - 2, 1)[0].split(" razlika ")[1];
     singleItemNiv -= parseFloat(umanjeno);
     infoNiv.innerText = "Razlika u ceni: " + singleItemNiv.toString();
-    racunNiv.innerText = temp.join("\r\n");
+    billNiv.innerText = temp.join("\r\n");
   });
 
-  function traziNiv(e) {
+  function search(e) {
     const odgovor = Baza[e];
     if (!Baza[e]) {
       alert("Nemate takav proizvod u bazi!");
     } else {
-      kolNiv.focus();
-      document.getElementById("artiklNiv").innerText = odgovor;
+      nivelationAmount.focus();
+      document.getElementById("articleNiv").innerText = odgovor;
     }
   }
   function exitNiv() {
     komNiv = [[]];
     singleItemNiv = 0;
-    sifraNiv.value = "";
-    kolNiv.value = "";
-    document.getElementById("artiklNiv").innerText = "-";
-    racunNiv.innerText = "";
-    nivelacijaDiv.style.display = "none";
+    nivelationCode.value = "";
+    nivelationAmount.value = "";
+    document.getElementById("articleNiv").innerText = "-";
+    billNiv.innerText = "";
+    nivelationDiv.style.display = "none";
   }
 }

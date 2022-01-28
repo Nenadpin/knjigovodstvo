@@ -10,120 +10,120 @@
 </head>
 
 <body>
-  <div class='meni'>
-    <button id='prodaja' class='meniBtn'>Prodaja</button>
-    <button id='nabavka' class='meniBtn'>Nabavka</button>
-    <button id='nivelacija' class='meniBtn'>Nivelacija</button>
-    <button id='pregledi' class='meniBtn'>Pregledi</button>
-    <button id='aplikacija' class='meniBtn'>Aplikacija</button>
+  <div class='menu'>
+    <button id='sell' class='menuBtn'>Prodaja</button>
+    <button id='import' class='menuBtn'>Nabavka</button>
+    <button id='nivelation' class='menuBtn'>Nivelacija</button>
+    <button id='show' class='menuBtn'>Pregledi</button>
+    <button id='application' class='menuBtn'>Aplikacija</button>
   </div>
   <div>
     <div class='fixed' id='izborDiv' style="height: 130px;">
       <div>
         <div style="width: 270px;">
-          <p class='operacija' id='operacija0'>Izaberite bazu</p>
+          <p class='operation'>Izaberite bazu</p>
           <input id='selector' type="file" onchange="readFile(this)" style="display: none;">
         </div>
         <p>Nema baze podataka</p>
         <p>na ovom uredjaju...</p>
-        <div class='slika'>
+        <div class='image'>
           <img src="open.png" onclick="selector.click()" />
         </div>
       </div>
     </div>
-    <div class='fixed forma' id='prodajaDiv'>
+    <div class='fixed form' id='sellDiv'>
       <div>
-        <div class="unos" style="width: 270px;">
-          <p class='operacija' id='infoProdaje'>Prodaja: </p>
+        <div class="entry" style="width: 270px;">
+          <p class='operation' id='sellInfo'>Prodaja: </p>
           <div style="margin-bottom: 2px;">
-            <input id='sifra' type="text" onfocus="sifra.select()" value="Artikl:" style="padding-left: 10px;">
-            <button id='trazi' style="position: absolute; height: 27px;"><img src="search.png"></button>
+            <input id='code' type="text" onfocus="code.select()" value="Artikl:" style="padding-left: 10px;">
+            <button id='search' style="position: absolute; height: 27px;"><img src="search.png"></button>
           </div>
           <div style="margin-bottom: 2px;">
-            <input id='kolicina' type="number" style="padding-left: 10px;">
-            <button id='kolBtn' style="position: absolute; height: 27px;"><img src="ok.png"></button>
+            <input id='amount' type="number" style="padding-left: 10px;">
+            <button id='sellBtn' style="position: absolute; height: 27px;"><img src="ok.png"></button>
           </div>
           <button id='delBtn' style="position: absolute; height: 27px;"><img src="close.png"></button>
         </div>
-        <div id='slikaP' class="slika">
+        <div id='sellImage' class="image">
           <img src="save.png" />
         </div>
       </div>
-      <p id='artikl'>-</p>
+      <p id='article'>-</p>
       <hr>
-      <p id='racun'></p>
+      <p id='bill'></p>
     </div>
-    <div class='fixed forma' id='nabavkaDiv'>
+    <div class='fixed form' id='importDiv'>
       <div>
-        <div class="unos" style="width: 270px;">
-          <p class='operacija' id='infoNabavke'>Nabavka: </p>
+        <div class="entry" style="width: 270px;">
+          <p class='operation' id='importInfo'>Nabavka: </p>
           <div style="margin-bottom: 2px;">
-            <input id='sifraN' type="text" onfocus="sifraN.select()" value="Artikl:" style="padding-left: 10px;">
-            <button id='traziN' style="position: absolute; height: 27px;"><img src="search.png"></button>
+            <input id='codeN' type="text" onfocus="codeN.select()" value="Artikl:" style="padding-left: 10px;">
+            <button id='searchN' style="position: absolute; height: 27px;"><img src="search.png"></button>
           </div>
           <div style="margin-bottom: 2px;">
-            <input id='kolicinaN' type="number" style="padding-left: 10px;">
-            <button id='kolBtnN' style="position: absolute; height: 27px;"><img src="ok.png"></button>
+            <input id='amountN' type="number" style="padding-left: 10px;">
+            <button id='amountBtnN' style="position: absolute; height: 27px;"><img src="ok.png"></button>
           </div>
           <button id='delBtnN' style="position: absolute; height: 27px;"><img src="close.png"></button>
         </div>
-        <div id='slikaN' class="slika">
+        <div id='imangeN' class="image">
           <img src="add.png" />
         </div>
       </div>
-      <p id='artiklN'>-</p>
+      <p id='articleN'>-</p>
       <hr>
-      <p id='racunN'></p>
+      <p id='billN'></p>
     </div>
-    <div class='fixed forma' id='nivelacijaDiv'>
+    <div class='fixed form' id='nivelationDiv'>
       <div>
-        <div class="unos" style="width: 270px;">
-          <p class='operacija' id='infoNiv'>Razlika u ceni: </p>
+        <div class="entry" style="width: 270px;">
+          <p class='operation' id='infoNiv'>Razlika u ceni: </p>
           <div style="margin-bottom: 2px;">
-            <input id='sifraNiv' type="text" onfocus="sifraNiv.select()" value="Artikl:" style="padding-left: 10px;">
-            <button id='traziNiv' style="position: absolute; height: 27px;"><img src="search.png"></button>
+            <input id='nivelationCode' type="text" onfocus="nivelationCode.select()" value="Artikl:" style="padding-left: 10px;">
+            <button id='nivelationSearch' style="position: absolute; height: 27px;"><img src="search.png"></button>
           </div>
           <div style="margin-bottom: 2px;">
-            <input id='kolicinaNiv' type="number" style="padding-left: 10px;">
-            <button id='kolBtnNiv' style="position: absolute; height: 27px;"><img src="ok.png"></button>
+            <input id='nivelationAmount' type="number" style="padding-left: 10px;">
+            <button id='nivelationAmountBtn' style="position: absolute; height: 27px;"><img src="ok.png"></button>
           </div>
           <button id='delBtnNiv' style="position: absolute; height: 27px;"><img src="close.png"></button>
         </div>
-        <div id='slikaNiv' class="slika">
+        <div id='nivelationImage' class="image">
           <img src="input.png" />
         </div>
       </div>
-      <p id='artiklNiv'>-</p>
+      <p id='articleNiv'>-</p>
       <hr>
-      <p id='racunNiv'></p>
+      <p id='billNiv'></p>
     </div>
-    <div class='fixed forma' id='pregledDiv'>
+    <div class='fixed form' id='showDiv'>
       <div>
-        <div class="unos" style="width: 270px;">
-          <p class='operacija' id='infoPregled'>Pregled i zamena: </p>
+        <div class="entry" style="width: 270px;">
+          <p class='operation' id='showInfo'>Pregled i zamena: </p>
           <div style="margin-bottom: 2px;">
-            <input id='sifraPr' type="text" onfocus="sifraPr.select()" value="Artikl:" style="padding-left: 10px;">
-            <button id='traziPr' style="position: absolute; height: 27px;"><img src="search.png"></button>
+            <input id='showCode' type="text" onfocus="showCode.select()" value="Artikl:" style="padding-left: 10px;">
+            <button id='searchBtn' style="position: absolute; height: 27px;"><img src="search.png"></button>
           </div>
-          <input id='kolicinaPr' type="number" style="padding-left: 10px;">
-          <button id='kolBtnPr' style="position: absolute; height: 27px;"><img src="zameni.png"></button>
+          <input id='replaceAmount' type="number" style="padding-left: 10px;">
+          <button id='replaceAmountBtn' style="position: absolute; height: 27px;"><img src="zameni.png"></button>
         </div>
-        <div id='slikaPr' class="slika">
+        <div id='replaceImage' class="image">
           <img src="menu.png" />
         </div>
       </div>
-      <p id='artiklPr'>-</p>
+      <p id='replaceArticle'>-</p>
       <hr>
-      <p id='lager'>Vrednost lagera: </p>
-      <p id='stvarno'>Knjigovodstveno stanje: </p>
+      <p id='stock'>Vrednost lagera: </p>
+      <p id='realState'>Knjigovodstveno stanje: </p>
     </div>
-    <pre id="prikaz"></pre>
+    <pre id="result"></pre>
   </div>
   <script src='index.js'></script>
-  <script src='pregled.js'></script>
-  <script src='prodaja.js'></script>
-  <script src='nabavka.js'></script>
-  <script src="nivelacija.js"></script>
+  <script src='show.js'></script>
+  <script src='sell.js'></script>
+  <script src='import.js'></script>
+  <script src="nivelation.js"></script>
 
 </body>
 

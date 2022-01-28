@@ -1,19 +1,19 @@
-function nabavka() {
-  const sifraN = document.getElementById("sifraN");
-  const kolN = document.getElementById("kolicinaN");
-  const kupi = document.getElementById("kolBtnN");
-  const slikaN = document.getElementById("slikaN");
-  const racunN = document.getElementById("racunN");
-  const infoN = document.getElementById("infoNabavke");
-  const traziBtn = document.getElementById("traziN");
+function importArticle() {
+  const codeN = document.getElementById("codeN");
+  const amount = document.getElementById("amountN");
+  const buy = document.getElementById("amountBtnN");
+  const imageN = document.getElementById("imangeN");
+  const billN = document.getElementById("billN");
+  const infoN = document.getElementById("importInfo");
+  const traziBtn = document.getElementById("searchN");
 
   let komN = [[]];
   let singleItemN = 0;
 
-  nabavkaDiv.style.display = "block";
-  sifraN.focus();
+  importDiv.style.display = "block";
+  codeN.focus();
 
-  slikaN.addEventListener("click", () => {
+  imageN.addEventListener("click", () => {
     if (komN.length > 1) {
       let datum = new Date();
       komN[0] = datum;
@@ -41,26 +41,26 @@ function nabavka() {
     exitN();
   });
 
-  sifraN.addEventListener("keydown", (e) => {
+  codeN.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
-      if (parseFloat(sifraN.value)) traziN(sifraN.value);
+      if (parseFloat(codeN.value)) searchN(codeN.value);
     }
   });
 
-  traziBtn.addEventListener("click", () => traziN(sifraN.value));
+  traziBtn.addEventListener("click", () => searchN(codeN.value));
 
-  kupi.addEventListener("click", () => {
-    if (Baza[parseFloat(sifraN.value)]) {
-      kupljeno(parseFloat(sifraN.value));
+  buy.addEventListener("click", () => {
+    if (Baza[parseFloat(codeN.value)]) {
+      kupljeno(parseFloat(codeN.value));
     } else {
       alert("Nemate takav proizvod!");
     }
   });
 
-  kolN.addEventListener("keydown", (e) => {
+  amount.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
-      if (Baza[parseFloat(sifraN.value)]) {
-        kupljeno(parseFloat(sifraN.value));
+      if (Baza[parseFloat(codeN.value)]) {
+        kupljeno(parseFloat(codeN.value));
       } else {
         alert("Nemate takav proizvod!");
       }
@@ -68,67 +68,67 @@ function nabavka() {
   });
 
   function kupljeno(art) {
-    if (art && parseFloat(kolN.value) > 0) {
-      komN.push([art, parseFloat(kolN.value)]);
+    if (art && parseFloat(amount.value) > 0) {
+      komN.push([art, parseFloat(amount.value)]);
       let singleArtN = Baza[art].split(",");
-      singleItemN += parseFloat(kolN.value) * parseFloat(singleArtN[4]);
-      document.getElementById("artiklN").innerText = "-";
-      racunN.innerText +=
-        sifraN.value +
+      singleItemN += parseFloat(amount.value) * parseFloat(singleArtN[4]);
+      document.getElementById("articleN").innerText = "-";
+      billN.innerText +=
+        codeN.value +
         "  " +
         singleArtN[1] +
         "  " +
-        kolN.value +
+        amount.value +
         "  " +
         singleArtN[4] +
         " = " +
-        parseFloat(kolN.value) * parseFloat(singleArtN[4]) +
+        parseFloat(amount.value) * parseFloat(singleArtN[4]) +
         "\r\n";
       infoN.innerText = "Nabavka: " + singleItemN.toString();
-      sifraN.value = "";
-      kolN.value = "";
-      sifraN.focus();
+      codeN.value = "";
+      amount.value = "";
+      codeN.focus();
     } else {
       alert("Neispravna kolicina!");
     }
   }
   document.getElementById("delBtnN").addEventListener("click", () => {
-    let temp = racunN.innerText.split("\r\n")[0].split("\n");
+    let temp = billN.innerText.split("\r\n")[0].split("\n");
     komN.pop();
     let umanjeno = temp.splice(temp.length - 2, 1)[0].split(" = ")[1];
     singleItemN -= parseFloat(umanjeno);
     infoN.innerText = "Nabavka: " + singleItemN.toString();
-    racunN.innerText = temp.join("\r\n");
+    billN.innerText = temp.join("\r\n");
   });
 
-  function traziN(e) {
+  function searchN(e) {
     const odgovor = Baza[e];
     if (!Baza[e]) {
       noviProizvod();
     } else {
-      kolN.focus();
-      document.getElementById("artiklN").innerText = odgovor;
+      amount.focus();
+      document.getElementById("articleN").innerText = odgovor;
     }
   }
   function noviProizvod() {
-    let naziv = prompt(`Unesite naziv artikla za sifru: ${sifraN.value}`);
+    let naziv = prompt(`Unesite naziv artikla za sifru: ${codeN.value}`);
     if (naziv) {
-      let cena = prompt(`Unesite prodajnu cenu za sifru: ${sifraN.value}`);
+      let cena = prompt(`Unesite prodajnu cenu za sifru: ${codeN.value}`);
       if (cena) {
         Baza[
-          parseFloat(sifraN.value)
-        ] = `${sifraN.value},${naziv},0,kom,${cena},0,0,0`;
-        kolN.focus();
-      } else sifraN.focus();
-    } else sifraN.focus();
+          parseFloat(codeN.value)
+        ] = `${codeN.value},${naziv},0,kom,${cena},0,0,0`;
+        amount.focus();
+      } else codeN.focus();
+    } else codeN.focus();
   }
   function exitN() {
     komN = [[]];
     singleItemN = 0;
-    sifraN.value = "";
-    kolN.value = "";
-    document.getElementById("artiklN").innerText = "-";
-    racunN.innerText = "";
-    nabavkaDiv.style.display = "none";
+    codeN.value = "";
+    amount.value = "";
+    document.getElementById("articleN").innerText = "-";
+    billN.innerText = "";
+    importDiv.style.display = "none";
   }
 }
