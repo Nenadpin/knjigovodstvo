@@ -106,9 +106,9 @@ input {
     margin-top: 50px;
   }
 }
-@media (min-width: 768px) and (max-width: 991px) {
+@media (min-width: 800px) and (max-width: 991px) {
   div.fixed {
-    right: 0px;
+    right: 5px;
     top: 85px;
     opacity: 0.8;
   }
@@ -117,20 +117,36 @@ input {
     background-color: papayawhip;
     margin-top: 50px;
   }
+  .meni {
+    padding-left: 0px;
+  }
 }
-@media (max-width: 767px) {
+@media (max-width: 799px) {
   div.fixed {
-    right: 0px;
+    left: 0px;
     top: 50px;
     opacity: 1;
+    width: 330px;
+  }
+  .slika {
+    right: 10px;
   }
   pre {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     background-color: papayawhip;
-    margin-top: 50px;
+    margin-top: 230px;
+    font-size: x-small;
+  }
+  .meni {
+    padding: 0px;
+    left: 0px;
   }
   .meniBtn {
-    width: 100px;
+    width: 70px;
+    padding: 0px;
     font-size: small;
+    text-transform: none;
+    margin-right: -5px;
   }
 }
+
