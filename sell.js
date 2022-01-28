@@ -27,16 +27,15 @@ function sell() {
         localStorage.setItem("prodaja", JSON.stringify(temp));
       } else localStorage.setItem("prodaja", JSON.stringify(kom));
       for (let i = 1; i < kom.length - 1; i++) {
-        singleItem = Baza[kom[i][0]].split(",");
+        singleItem = storage[kom[i][0]].split(",");
         singleItem[6] = parseFloat(singleItem[6]) - kom[i][1];
         singleItem[7] = parseFloat(singleItem[7]) - kom[i][1];
         iznos = parseFloat(singleItem[4]) * kom[i][1];
-        cenaLager -= iznos;
-        cenaStvarno -= iznos;
-        Baza[kom[i][0]] = singleItem.join(",");
-        localStorage.setItem("lager", JSON.stringify(cenaLager));
-        localStorage.setItem("lagerStvarno", JSON.stringify(cenaStvarno));
-        localStorage.setItem("baza", JSON.stringify(Baza));
+        stockPrice -= iznos;
+        actualPrice -= iznos;
+        storage[kom[i][0]] = singleItem.join(",");
+        
+        updateStorage();
       }
       exitP();
     }
@@ -57,7 +56,7 @@ function sell() {
   function sold(art) {
     if (art && parseFloat(amount.value) > 0) {
       kom.push([art, parseFloat(amount.value)]);
-      let singleArt = Baza[art].split(",");
+      let singleArt = storage[art].split(",");
       singleItemP += parseFloat(amount.value) * parseFloat(singleArt[4]);
       document.getElementById("article").innerText = "-";
       racun.innerText +=

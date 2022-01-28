@@ -15,27 +15,22 @@ function importArticle() {
 
   imageN.addEventListener("click", () => {
     if (komN.length > 1) {
-      let datum = new Date();
-      komN[0] = datum;
+      komN[0] = new Date();
       komN.push(singleItemN.toString());
-      let iznos = 0;
       let singleItem = [];
       if (localStorage.getItem("nabavka")) {
         let temp = JSON.parse(localStorage.getItem("nabavka"));
-        temp.push(komN);
+        temp = temp.concat(komN);
         localStorage.setItem("nabavka", JSON.stringify(temp));
       } else localStorage.setItem("nabavka", JSON.stringify(komN));
       for (let i = 1; i < komN.length - 1; i++) {
-        singleItem = Baza[komN[i][0]].split(",");
-        singleItem[6] = parseFloat(singleItem[6]) + komN[i][1];
-        singleItem[7] = parseFloat(singleItem[7]) + komN[i][1];
-        iznos = parseFloat(singleItem[4]) * komN[i][1];
-        cenaLager += iznos;
-        cenaStvarno += iznos;
-        Baza[komN[i][0]] = singleItem.join(",");
-        localStorage.setItem("lager", JSON.stringify(cenaLager));
-        localStorage.setItem("lagerStvarno", JSON.stringify(cenaStvarno));
-        localStorage.setItem("baza", JSON.stringify(Baza));
+        singleItem = storage[komN[i][0]];
+        singleItem.stock += komN[i][1];
+        singleItem.realStock += komN[i][1];
+        let price = singleItem.price * komN[i][1];
+        stockPrice += price;
+        actualPrice += price;
+        updateStorage();
       }
     }
     exitN();
@@ -50,41 +45,33 @@ function importArticle() {
   traziBtn.addEventListener("click", () => searchN(codeN.value));
 
   buy.addEventListener("click", () => {
-    if (Baza[parseFloat(codeN.value)]) {
-      kupljeno(parseFloat(codeN.value));
-    } else {
-      alert("Nemate takav proizvod!");
-    }
+    storeRecord(codeN.value);
   });
 
   amount.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
-      if (Baza[parseFloat(codeN.value)]) {
-        kupljeno(parseFloat(codeN.value));
-      } else {
-        alert("Nemate takav proizvod!");
-      }
+      storeRecord(codeN.value);
     }
   });
+
+  function storeRecord(value) {
+    value = parseFloat(value);
+    if (storage[parseFloat(value)]) {
+      kupljeno(parseFloat(value));
+    } else {
+      alert("Nemate takav proizvod!");
+    }
+  }
 
   function kupljeno(art) {
     if (art && parseFloat(amount.value) > 0) {
       komN.push([art, parseFloat(amount.value)]);
-      let singleArtN = Baza[art].split(",");
-      singleItemN += parseFloat(amount.value) * parseFloat(singleArtN[4]);
+      let singleArtN = storage[art];
+      singleItemN += parseFloat(amount.value) * singleArtN.price;
       document.getElementById("articleN").innerText = "-";
-      billN.innerText +=
-        codeN.value +
-        "  " +
-        singleArtN[1] +
-        "  " +
-        amount.value +
-        "  " +
-        singleArtN[4] +
-        " = " +
-        parseFloat(amount.value) * parseFloat(singleArtN[4]) +
-        "\r\n";
-      infoN.innerText = "Nabavka: " + singleItemN.toString();
+      let price = parseFloat(amount.value) * singleArtN.price;
+      billN.innerText += `${codeN.value}  ${singleArtN.name}  ${amount.value}  ${singleArtN.price} = ${price}\r\n`;
+      infoN.innerText = "Nabavka: " + singleItemN;
       codeN.value = "";
       amount.value = "";
       codeN.focus();
@@ -102,12 +89,12 @@ function importArticle() {
   });
 
   function searchN(e) {
-    const odgovor = Baza[e];
-    if (!Baza[e]) {
+    const odgovor = storage[e];
+    if (!odgovor) {
       noviProizvod();
     } else {
       amount.focus();
-      document.getElementById("articleN").innerText = odgovor;
+      document.getElementById("articleN").innerText = odgovor.originalCSV;
     }
   }
   function noviProizvod() {
@@ -115,7 +102,7 @@ function importArticle() {
     if (naziv) {
       let cena = prompt(`Unesite prodajnu cenu za sifru: ${codeN.value}`);
       if (cena) {
-        Baza[
+        storage[
           parseFloat(codeN.value)
         ] = `${codeN.value},${naziv},0,kom,${cena},0,0,0`;
         amount.focus();

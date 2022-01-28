@@ -11,21 +11,21 @@
 
 <body>
   <div class='menu'>
-    <button id='sell' class='menuBtn'>Prodaja</button>
-    <button id='import' class='menuBtn'>Nabavka</button>
-    <button id='nivelation' class='menuBtn'>Nivelacija</button>
-    <button id='show' class='menuBtn'>Pregledi</button>
-    <button id='application' class='menuBtn'>Aplikacija</button>
+    <button class='menuBtn' onclick="styleMenuNav(0);sell()" >Prodaja</button>
+    <button class='menuBtn' onclick="styleMenuNav(1);importArticle()">Nabavka</button>
+    <button class='menuBtn' onclick="styleMenuNav(2);nivelation()">Nivelacija</button>
+    <button class='menuBtn' onclick="styleMenuNav(3);show()">Pregledi</button>
+    <button class='menuBtn' onclick="styleMenuNav(4);applicationClick()">Aplikacija</button>
   </div>
   <div>
     <div class='fixed' id='izborDiv' style="height: 130px;">
       <div>
         <div style="width: 270px;">
+          <!-- nema potrebe u dva <p> da ide ovo, moze i u jedan -->
+          <p>Nema baze podataka na ovom uredjaju...</p>
           <p class='operation'>Izaberite bazu</p>
           <input id='selector' type="file" onchange="readFile(this)" style="display: none;">
         </div>
-        <p>Nema baze podataka</p>
-        <p>na ovom uredjaju...</p>
         <div class='image'>
           <img src="open.png" onclick="selector.click()" />
         </div>

@@ -15,9 +15,9 @@ function show() {
   showCode.focus();
 
   document.getElementById("realState").innerText =
-    "Knjigovodstveno stanje: " + cenaStvarno;
+    "Knjigovodstveno stanje: " + actualPrice;
   document.getElementById("stock").innerText =
-    "Vrednost lagera: " + cenaLager;
+    "Vrednost lagera: " + stockPrice;
 
   replaceAmountBtn.addEventListener("click", () => {
     if (replaceAmount.value) {
@@ -26,7 +26,7 @@ function show() {
   });
 
   searchBtn.addEventListener('click', () => {
-    const odgovor = Baza[parseInt(showCode.value)];
+    const odgovor = storage[parseInt(showCode.value)];
     if (!odgovor) {
       alert("Nemate takav proizvod u bazi");
     } else {
@@ -36,17 +36,16 @@ function show() {
   })
 
   function izmena(e) {
-    let clan = Baza[e].split(",");
+    let clan = storage[e].split(",");
     if (replaceAmount.value) {
       let tempCena = parseFloat(clan[7]);
       clan[7] = replaceAmount.value;
-      cenaLager -= parseFloat(clan[4]) * (tempCena - clan[7]);
-      Baza[e] = clan.join(",");
-      document.getElementById("replaceArticle").innerText = Baza[e];
-      localStorage.setItem("baza", JSON.stringify(Baza));
-      localStorage.setItem("lager", JSON.stringify(cenaLager));
+      stockPrice -= parseFloat(clan[4]) * (tempCena - clan[7]);
+      storage[e] = clan.join(",");
+      document.getElementById("replaceArticle").innerText = storage[e];
+      updateStorage();
       document.getElementById("stock").innerText =
-        "Vrednost lagera: " + cenaLager;
+        "Vrednost lagera: " + stockPrice;
     }
     replaceAmount.value = "";
     showCode.value = "";
@@ -60,16 +59,16 @@ function show() {
     if (samoLager) {
       let a = [];
       text.innerText = "";
-      for (let i = 1; i < Baza.length + 1; i++) {
-        if (Baza[i] && parseFloat(Baza[i].split(",")[4]) > 0) {
-          a[i] = Baza[i];
+      for (let i = 1; i < storage.length + 1; i++) {
+        if (storage[i] && parseFloat(storage[i].split(",")[4]) > 0) {
+          a[i] = storage[i];
         }
       }
       showInfo.innerText = "samo proizvodi na lageru";
       text.innerText = a.filter((x) => x !== null).join("\r\n");
     } else {
       showInfo.innerText = "svi proizvodi";
-      text.innerText = Baza.filter((x) => x !== null).join("\r\n");
+      text.innerText = storage.filter((x) => x !== null).join("\r\n");
     }
   });
 
@@ -83,23 +82,23 @@ function show() {
     if (e.key === "Enter") {
       if (parseFloat(showCode.value)) {
         let g = [[]];
-        for (let i = 0; i < Baza.length; i++) {
-          if (Baza[i]) {
+        for (let i = 0; i < storage.length; i++) {
+          if (storage[i]) {
             if (
-              parseFloat(Baza[i].split(",")[4]) === parseFloat(showCode.value)
+              parseFloat(storage[i].split(",")[4]) === parseFloat(showCode.value)
             ) {
-              g.unshift(Baza[i].split(","));
+              g.unshift(storage[i].split(","));
             } else if (
-              parseFloat(Baza[i].split(",")[4]) > parseFloat(showCode.value)
+              parseFloat(storage[i].split(",")[4]) > parseFloat(showCode.value)
             ) {
-              g.push(Baza[i].split(","));
+              g.push(storage[i].split(","));
             }
           }
         }
         filtered = g.map((e) => e.join(","));
         text.innerText = filtered.filter((x) => x !== null).join("\r\n");
       } else {
-        filtered = Baza.filter((str) => {
+        filtered = storage.filter((str) => {
           if (str) return str.includes(showCode.value.toUpperCase());
         });
         text.innerText = filtered.join("\r\n");

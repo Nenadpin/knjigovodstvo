@@ -26,14 +26,13 @@ function nivelation() {
         localStorage.setItem("nivelacija", JSON.stringify(temp));
       } else localStorage.setItem("nivelacija", JSON.stringify(komNiv));
       for (let i = 1; i < komNiv.length; i++) {
-        singleItem = Baza[komNiv[i][0]].split(",");
+        singleItem = storage[komNiv[i][0]].split(",");
         singleItem[4] = komNiv[i][2];
-        cenaLager += singleItemNiv;
-        cenaStvarno += singleItemNiv;
-        Baza[komNiv[i][0]] = singleItem.join(",");
-        localStorage.setItem("lager", JSON.stringify(cenaLager));
-        localStorage.setItem("lagerStvarno", JSON.stringify(cenaStvarno));
-        localStorage.setItem("baza", JSON.stringify(Baza));
+        stockPrice += singleItemNiv;
+        actualPrice += singleItemNiv;
+        storage[komNiv[i][0]] = singleItem.join(",");
+        
+        updateStorage();
       }
       exitNiv();
     }
@@ -48,7 +47,7 @@ function nivelation() {
   nivelationSearchBtn.addEventListener("click", () => traziN(nivelationCode.value));
 
   zameniNiv.addEventListener("click", () => {
-    if (Baza[parseFloat(nivelationCode.value)]) {
+    if (storage[parseFloat(nivelationCode.value)]) {
       zamenjeno(parseFloat(nivelationCode.value));
     } else {
       alert("Nemate takav proizvod!");
@@ -57,7 +56,7 @@ function nivelation() {
 
   nivelationAmount.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
-      if (Baza[parseFloat(nivelationCode.value)]) {
+      if (storage[parseFloat(nivelationCode.value)]) {
         zamenjeno(parseFloat(nivelationCode.value));
       } else {
         alert("Nemate takav proizvod!");
@@ -67,11 +66,11 @@ function nivelation() {
 
   function zamenjeno(art) {
     if (art && parseFloat(nivelationAmount.value) > 0) {
-      let singleArtNiv = Baza[art].split(",");
+      let singleArtNiv = storage[art].split(",");
 
       komNiv.push([
         art,
-        parseFloat(Baza[art].split(",")[4]),
+        parseFloat(storage[art].split(",")[4]),
         parseFloat(nivelationAmount.value),
       ]);
       singleItemNiv +=
@@ -91,7 +90,7 @@ function nivelation() {
           parseFloat(singleArtNiv[6]).toString() +
         "\r\n";
       singleArtNiv[4] = nivelationAmount.value;
-      Baza[art] = singleArtNiv.join(",");
+      storage[art] = singleArtNiv.join(",");
       infoNiv.innerText = "Razlika u ceni: " + singleItemNiv.toString();
       nivelationCode.value = "";
       nivelationAmount.value = "";
@@ -110,8 +109,8 @@ function nivelation() {
   });
 
   function search(e) {
-    const odgovor = Baza[e];
-    if (!Baza[e]) {
+    const odgovor = storage[e];
+    if (!storage[e]) {
       alert("Nemate takav proizvod u bazi!");
     } else {
       nivelationAmount.focus();
