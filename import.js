@@ -56,8 +56,8 @@ function importArticle() {
 
   function storeRecord(value) {
     value = parseFloat(value);
-    if (storage[parseFloat(value)]) {
-      kupljeno(parseFloat(value));
+    if (storage[value]) {
+      kupljeno(value);
     } else {
       alert("Nemate takav proizvod!");
     }
